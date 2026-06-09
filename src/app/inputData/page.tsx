@@ -95,27 +95,59 @@ export default function RegisterPage() {
           }}
         >
           {/* STEPPER */}
-          <Stepper
-            activeStep={activeStep}
-            alternativeLabel
-            sx={{
-              mb: 6,
-
-              "& .MuiStepIcon-root.Mui-active": {
-                color: "#F4B400",
-              },
-
-              "& .MuiStepIcon-root.Mui-completed": {
-                color: "#F4B400",
-              },
-            }}
-          >
-            {steps.map((step) => (
-              <Step key={step}>
-                <StepLabel>{step}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
+          <Box sx={{ overflowX: "auto", px: { xs: 0, sm: 1 }, mb: 2 }}>
+            <Stepper
+              activeStep={activeStep}
+              alternativeLabel
+              sx={{
+                mb: 6,
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+                px: { xs: 0, sm: 1 },
+                "& .MuiStep-root": {
+                  minWidth: 0,
+                  flex: "1 1 140px",
+                },
+                "& .MuiStepLabel-root": {
+                  width: "100%",
+                },
+                "& .MuiStepLabel-label": {
+                  fontSize: {
+                    xs: "0.72rem",
+                    sm: "0.78rem",
+                    md: "0.85rem",
+                  },
+                  lineHeight: 1.2,
+                  whiteSpace: "normal",
+                  textAlign: "center",
+                },
+                "& .MuiStepIcon-root": {
+                  width: {
+                    xs: 26,
+                    sm: 30,
+                    md: 34,
+                  },
+                  height: {
+                    xs: 26,
+                    sm: 30,
+                    md: 34,
+                  },
+                },
+                "& .MuiStepIcon-root.Mui-active": {
+                  color: "#F4B400",
+                },
+                "& .MuiStepIcon-root.Mui-completed": {
+                  color: "#400",
+                },
+              }}
+            >
+              {steps.map((step) => (
+                <Step key={step}>
+                  <StepLabel>{step}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
 
           {/* TITLE */}
           <Box mb={4}>
@@ -139,8 +171,9 @@ export default function RegisterPage() {
             <Grid size={{ xs: 12, md: 6 }}>
               <TextField
                 fullWidth
-                label="Nomor Induk Siswa Nasional (NISN)"
-                helperText="Masukkan 10 digit NISN sesuai dengan data sekolah"
+                required
+                label="Nomor Induk Kependudukan (NIK)"
+                helperText="Masukkan 16 digit NIK sesuai KTP/KK"
                 sx={inputStyle}
               />
             </Grid>
@@ -148,6 +181,7 @@ export default function RegisterPage() {
             <Grid size={{ xs: 12, md: 6 }}>
               <TextField
                 fullWidth
+                required
                 label="Nomor Induk Siswa Nasional (NISN)"
                 helperText="Masukkan NISN sesuai data sekolah"
                 sx={inputStyle}
@@ -156,13 +190,18 @@ export default function RegisterPage() {
 
             {/* Baris 2 */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <TextField fullWidth label="Nama Lengkap" sx={inputStyle} />
+              <TextField
+                fullWidth
+                required
+                label="Nama Lengkap"
+                sx={inputStyle}
+              />
             </Grid>
 
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormControl fullWidth sx={inputStyle}>
+              <FormControl fullWidth required sx={inputStyle}>
                 <InputLabel>Jenis Kelamin</InputLabel>
-                <Select label="Jenis Kelamin">
+                <Select required label="Jenis Kelamin">
                   <MenuItem value="L">Laki-laki</MenuItem>
                   <MenuItem value="P">Perempuan</MenuItem>
                 </Select>
@@ -171,26 +210,49 @@ export default function RegisterPage() {
 
             {/* Baris 3 */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <TextField fullWidth label="Tempat Lahir" sx={inputStyle} />
+              <TextField
+                fullWidth
+                required
+                label="Tempat Lahir"
+                sx={inputStyle}
+              />
             </Grid>
 
+            {/* date */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <TextField fullWidth type="date" sx={inputStyle} />
+              <TextField
+                fullWidth
+                type="date"
+                required
+                label="Tanggal Lahir"
+                slotProps={{
+                  inputLabel: {
+                    shrink: true,
+                  },
+                }}
+              />
             </Grid>
 
             {/* Baris 4 */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <TextField fullWidth type="email" label="Email" sx={inputStyle} />
+              <TextField
+                fullWidth
+                required
+                type="email"
+                label="Email"
+                sx={inputStyle}
+              />
             </Grid>
 
             <Grid size={{ xs: 12, md: 6 }}>
-              <TextField fullWidth label="Nomor HP" sx={inputStyle} />
+              <TextField fullWidth required label="Nomor HP" sx={inputStyle} />
             </Grid>
 
             {/* Baris 5 */}
             <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
+                required
                 multiline
                 rows={4}
                 label="Alamat"
@@ -201,7 +263,7 @@ export default function RegisterPage() {
 
           {/* BUTTON */}
           <Button
-            onclick={handleNext}
+            onClick={handleNext}
             fullWidth
             variant="outlined"
             size="large"
