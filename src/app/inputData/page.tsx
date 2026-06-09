@@ -35,6 +35,12 @@ export default function RegisterPage() {
   function handleNext() {
     setActiveStep((prev) => prev + 1);
   }
+
+  const inputStyle = {
+    "& .MuiOutlinedInput-root": {
+      borderRadius: 2,
+    },
+  };
   return (
     <Box
       sx={{
@@ -128,7 +134,70 @@ export default function RegisterPage() {
           </Box>
 
           {/* FORM */}
-          
+          <Grid container spacing={3}>
+            {/* nik */}
+            <Grid size={{ xs: 12, md: 6 }}>
+              <TextField
+                fullWidth
+                label="Nomor Induk Siswa Nasional (NISN)"
+                helperText="Masukkan 10 digit NISN sesuai dengan data sekolah"
+                sx={inputStyle}
+              />
+            </Grid>
+            {/* nisn */}
+            <Grid size={{ xs: 12, md: 6 }}>
+              <TextField
+                fullWidth
+                label="Nomor Induk Siswa Nasional (NISN)"
+                helperText="Masukkan NISN sesuai data sekolah"
+                sx={inputStyle}
+              />
+            </Grid>
+
+            {/* Baris 2 */}
+            <Grid size={{ xs: 12, md: 6 }}>
+              <TextField fullWidth label="Nama Lengkap" sx={inputStyle} />
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 6 }}>
+              <FormControl fullWidth sx={inputStyle}>
+                <InputLabel>Jenis Kelamin</InputLabel>
+                <Select label="Jenis Kelamin">
+                  <MenuItem value="L">Laki-laki</MenuItem>
+                  <MenuItem value="P">Perempuan</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+
+            {/* Baris 3 */}
+            <Grid size={{ xs: 12, md: 6 }}>
+              <TextField fullWidth label="Tempat Lahir" sx={inputStyle} />
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 6 }}>
+              <TextField fullWidth type="date" sx={inputStyle} />
+            </Grid>
+
+            {/* Baris 4 */}
+            <Grid size={{ xs: 12, md: 6 }}>
+              <TextField fullWidth type="email" label="Email" sx={inputStyle} />
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 6 }}>
+              <TextField fullWidth label="Nomor HP" sx={inputStyle} />
+            </Grid>
+
+            {/* Baris 5 */}
+            <Grid size={{ xs: 12 }}>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Alamat"
+                sx={inputStyle}
+              />
+            </Grid>
+          </Grid>
 
           {/* BUTTON */}
           <Button
