@@ -23,6 +23,8 @@ import DataDiriForm from "./dataDiri";
 import DataSekolahForm from "./dataSekolah";
 import PilihanPendaftaranForm from "./pilihanPendaftaran";
 import PersyaratanJalurForm from "./persyaratanJalur";
+import PembayaranForm from "./pembayaran";
+import SelesaiPage from "./selesai";
 
 const steps = [
   "Data Diri",
@@ -30,15 +32,19 @@ const steps = [
   "Pilihan Pendaftaran",
   "Persyaratan Jalur",
   "Pembayaran",
+  "Selesai",
 ];
 
 export default function RegisterPage() {
   const [activeStep, setActiveStep] = useState<number>(0);
   const currentStepLabel = steps[activeStep] ?? steps[0];
+  const isLastStep = activeStep === steps.length - 1;
 
   // fungsi untuk next stepper
   function handleNext() {
-    setActiveStep((prev) => prev + 1);
+    if (!isLastStep) {
+      setActiveStep((prev) => prev + 1);
+    }
   }
 
   return (
@@ -174,26 +180,30 @@ export default function RegisterPage() {
           {activeStep === 1 && <DataSekolahForm />}
           {activeStep === 2 && <PilihanPendaftaranForm />}
           {activeStep === 3 && <PersyaratanJalurForm />}
+          {activeStep === 4 && <PembayaranForm />}
+          {activeStep === 5 && <SelesaiPage />}
 
           {/* BUTTON */}
-          <Button
-            onClick={handleNext}
-            fullWidth
-            variant="outlined"
-            size="large"
-            endIcon={<ArrowForwardIcon />}
-            sx={{
-              mt: 5,
-              mb: 3,
-              py: 1.8,
-              borderRadius: 2,
-              textTransform: "none",
-              fontSize: "1rem",
-              fontWeight: 700,
-            }}
-          >
-            Lanjut Proses Berikutnya
-          </Button>
+          {!isLastStep && (
+            <Button
+              onClick={handleNext}
+              fullWidth
+              variant="outlined"
+              size="large"
+              endIcon={<ArrowForwardIcon />}
+              sx={{
+                mt: 5,
+                mb: 3,
+                py: 1.8,
+                borderRadius: 2,
+                textTransform: "none",
+                fontSize: "1rem",
+                fontWeight: 700,
+              }}
+            >
+              Lanjut Proses Berikutnya
+            </Button>
+          )}
 
           {/* LOGIN */}
           <Typography align="center" mt={3} color="text.secondary">
