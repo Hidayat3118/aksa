@@ -19,6 +19,10 @@ import {
 } from "@mui/material";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import DataDiriForm from "./dataDiri";
+import DataSekolahForm from "./dataSekolah";
+import PilihanPendaftaranForm from "./pilihanPendaftaran";
+import PersyaratanJalurForm from "./persyaratanJalur";
 
 const steps = [
   "Data Diri",
@@ -30,17 +34,13 @@ const steps = [
 
 export default function RegisterPage() {
   const [activeStep, setActiveStep] = useState<number>(0);
+  const currentStepLabel = steps[activeStep] ?? steps[0];
 
   // fungsi untuk next stepper
   function handleNext() {
     setActiveStep((prev) => prev + 1);
   }
 
-  const inputStyle = {
-    "& .MuiOutlinedInput-root": {
-      borderRadius: 2,
-    },
-  };
   return (
     <Box
       sx={{
@@ -137,7 +137,7 @@ export default function RegisterPage() {
                   color: "#F4B400",
                 },
                 "& .MuiStepIcon-root.Mui-completed": {
-                  color: "#400",
+                  color: "#2e7d32",
                 },
               }}
             >
@@ -152,7 +152,7 @@ export default function RegisterPage() {
           {/* TITLE */}
           <Box mb={4}>
             <Typography variant="h4" fontWeight={700} gutterBottom>
-              Data Calon Mahasiswa
+              {currentStepLabel}
             </Typography>
 
             <Typography
@@ -161,105 +161,19 @@ export default function RegisterPage() {
               mb={4}
               sx={{ my: 3 }}
             >
-              Langkah 1 dari 5 — Isi data diri Anda dengan benar
+              Langkah {activeStep + 1} dari {steps.length} — Isi data diri Anda dengan benar
             </Typography>
           </Box>
 
           {/* FORM */}
-          <Grid container spacing={3}>
-            {/* nik */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TextField
-                fullWidth
-                required
-                label="Nomor Induk Kependudukan (NIK)"
-                helperText="Masukkan 16 digit NIK sesuai KTP/KK"
-                sx={inputStyle}
-              />
-            </Grid>
-            {/* nisn */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TextField
-                fullWidth
-                required
-                label="Nomor Induk Siswa Nasional (NISN)"
-                helperText="Masukkan NISN sesuai data sekolah"
-                sx={inputStyle}
-              />
-            </Grid>
+          {/* <DataDiriForm /> */}
+          {/* <DataSekolahForm /> */}
+          {/* <PilihanPendaftaranForm /> */}
 
-            {/* Baris 2 */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TextField
-                fullWidth
-                required
-                label="Nama Lengkap"
-                sx={inputStyle}
-              />
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              <FormControl fullWidth required sx={inputStyle}>
-                <InputLabel>Jenis Kelamin</InputLabel>
-                <Select required label="Jenis Kelamin">
-                  <MenuItem value="L">Laki-laki</MenuItem>
-                  <MenuItem value="P">Perempuan</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            {/* Baris 3 */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TextField
-                fullWidth
-                required
-                label="Tempat Lahir"
-                sx={inputStyle}
-              />
-            </Grid>
-
-            {/* date */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TextField
-                fullWidth
-                type="date"
-                required
-                label="Tanggal Lahir"
-                slotProps={{
-                  inputLabel: {
-                    shrink: true,
-                  },
-                }}
-              />
-            </Grid>
-
-            {/* Baris 4 */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TextField
-                fullWidth
-                required
-                type="email"
-                label="Email"
-                sx={inputStyle}
-              />
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TextField fullWidth required label="Nomor HP" sx={inputStyle} />
-            </Grid>
-
-            {/* Baris 5 */}
-            <Grid size={{ xs: 12 }}>
-              <TextField
-                fullWidth
-                required
-                multiline
-                rows={4}
-                label="Alamat"
-                sx={inputStyle}
-              />
-            </Grid>
-          </Grid>
+          {activeStep === 0 && <DataDiriForm />}
+          {activeStep === 1 && <DataSekolahForm />}
+          {activeStep === 2 && <PilihanPendaftaranForm />}
+          {activeStep === 3 && <PersyaratanJalurForm />}
 
           {/* BUTTON */}
           <Button
