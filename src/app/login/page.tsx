@@ -98,7 +98,7 @@ export default function LoginPage() {
           </FormControl>
 
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1, mb: 2 }}>
-            <MuiLink href="#" underline="hover" variant="body2">
+            <MuiLink href="/forgotPassword" underline="hover" variant="body2">
               Lupa kata sandi?
             </MuiLink>
           </Box>
