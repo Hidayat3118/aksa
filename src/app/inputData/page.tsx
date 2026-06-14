@@ -27,7 +27,7 @@ import PembayaranForm from "./pembayaran";
 import SelesaiPage from "./selesai";
 
 const steps = [
-  "Data Diri",
+  "Data Diri",  
   "Data Sekolah",
   "Pilihan Pendaftaran",
   "Persyaratan Jalur",
